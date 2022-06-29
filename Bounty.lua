@@ -30,7 +30,6 @@ end)
 function random_pay()
 	while randomamount <= 10000  do
 		randomamount = amount[math.random(#amount)]
-		util.toast("".. randomamount)
 		util.yield(delay * 100)
 	end
 	return randomamount 
