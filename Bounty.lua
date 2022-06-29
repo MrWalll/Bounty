@@ -1,5 +1,7 @@
---coded by MrWall 
-
+--[[
+coded by MrWall 
+Version 1.1
+]]
 util.require_natives(1640181023)
 
 util.show_corner_help("~s~Loaded ~o~ " .. SCRIPT_FILENAME .. " ~p~;)\n~s~Let's farm some ~g~$$$")
