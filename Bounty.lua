@@ -1,7 +1,5 @@
---[[
-coded by MrWall 
-Version 1.1
-]]
+--coded by MrWall 
+
 util.require_natives(1640181023)
 
 util.show_corner_help("~s~Loaded ~o~ " .. SCRIPT_FILENAME .. " ~p~;)\n~s~Let's farm some ~g~$$$")
@@ -44,7 +42,7 @@ end)
 
 --Bounty Toggle
 menu.toggle_loop(menu.my_root(), "Start", {}, "Will get a random players and give them bounty on set time", function()
-	if ~ #playerList == 0 then
+	if #playerList > 0 then
 		randomPlayer = players.get_name(playerList[math.random(1, #playerList)])
 		menu.trigger_commands("bounty" .. randomPlayer .. " " .. randomamount)
 		if notify then
@@ -54,11 +52,9 @@ menu.toggle_loop(menu.my_root(), "Start", {}, "Will get a random players and giv
 			end
 		end
 			util.yield(delay * 1000)
-	elseif #playerList == 0 then
+	else
 		util.show_corner_help("Lobby has ~r~no ~w~other ~o~players.\n\n~w~Consider ~g~joining ~w~a ~g~new one.")
 		util.yield(60000)
-	else
-		return
 	end
 end)
 
