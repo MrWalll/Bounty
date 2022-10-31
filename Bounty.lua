@@ -79,9 +79,11 @@ end)
 
 menu.action(menu.my_root(), "Reset amount", {}, "", function ()
 	randomamount = 10000
-	menu.set_value(start, false)
-	util.yield(800)
-	menu.set_value(start, true)
+	if menu.get_value(start) then
+		menu.set_value(start, false)
+		util.yield(800)
+		menu.set_value(start, true)
+	end
 	if menu.get_value(random) then menu.set_value(random, false) end
 end)
 
