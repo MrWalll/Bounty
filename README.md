@@ -1,8 +1,8 @@
 # Bounty
 <br>
-A script to put a bounty on a random player at a specified time. 
+A script to put a bounty on a random player in a loop. 
 <hr> </hr>
-- Amount can be set to 𝟏𝟎𝐤 or chosen at random(1k - 9k)
+- Amount can be set via input field, chosen at random(1k - 9k) or just let it be and it will be 10k
 <br>
-- Time can be set from 10 to 300 sec 
+- Time to wait to set a bounty on the next player can be set from 10 to 300 sec 
 
