@@ -1,4 +1,4 @@
---coded by MrWall 
+--coded by *MrWall 
 
 util.require_natives(1640181023)
 
@@ -24,15 +24,20 @@ menu.slider(menu.my_root(), "Repeat Colldown", {"bdelay"}, "Set the time on how 
 	delay = value
 end)
 
+menu.text_input(menu.my_root(), "Amount", {"bountyamount"}, "Choose a NUMBER not bigger than 10k to be set, as bounty, on random players.", function (int)
+	randomamount = int
+end)
+
 --Random Amount
 function random_pay()
+	if type(randomamount) == "string" then randomamount = 1 end
 	while randomamount <= 10000  do
 		randomamount = amount[math.random(#amount)]
 		util.yield(delay * 100)
 	end
-	return randomamount 
+	return randomamount
 end
-menu.toggle(menu.my_root(), "Random payout¿", {}, "Set $ at random or 10k\n\nActive = random", function(d)
+random = menu.toggle(menu.my_root(), "Random payout¿", {}, "Set $ at random or 10k\n\nOverwrites the input above.", function(d)
 	if d then
 		random_pay()
 	else
@@ -41,20 +46,20 @@ menu.toggle(menu.my_root(), "Random payout¿", {}, "Set $ at random or 10k\n\nAc
 end)
 
 --Bounty Toggle
-menu.toggle_loop(menu.my_root(), "Start", {}, "Will get a random players and give them bounty on set time", function()
+start = menu.toggle_loop(menu.my_root(), "Start", {}, "Will get a random players and give them bounty on set time", function()
 	if #playerList > 0 then
 		randomPlayer = players.get_name(playerList[math.random(1, #playerList)])
-		menu.trigger_commands("bounty" .. randomPlayer .. " " .. randomamount)
+		menu.trigger_commands("bounty"..randomPlayer.." "..randomamount)
 		if notify then
-			util.show_corner_help("~o~Bounty placed~y~... \n~r~$ ~w~= " .. randomamount)
+			util.show_corner_help("~o~Bounty placed~y~... \n~r~$ ~w~= "..randomamount)
 			if not util.BEGIN_TEXT_COMMAND_IS_THIS_HELP_MESSAGE_BEING_DISPLAYED("~p~Notifications ~g~On") then
-				util.show_corner_help("~o~Bounty placed~y~... \n~r~$ ~w~= " .. randomamount)
+				util.show_corner_help("~o~Bounty placed~y~... \n~r~$ ~w~= "..randomamount)
 			end
 		end
 			util.yield(delay * 1000)
 	else
 		util.show_corner_help("Lobby has ~r~no ~w~other ~o~players.\n\n~w~Consider ~g~joining ~w~a ~g~new one.")
-		util.yield(60000)
+		menu.set_value(start, false)
 	end
 end)
 
@@ -72,6 +77,15 @@ menu.toggle(menu.my_root(), "Notifications", {}, "By default notifications are t
 	end
 end)
 
+menu.action(menu.my_root(), "Reset amount", {}, "", function ()
+	randomamount = 10000
+	menu.set_value(start, false)
+	util.yield(800)
+	menu.set_value(start, true)
+	if menu.get_value(random) then menu.set_value(random, false) end
+end)
+
+
 util.keep_running()
 
---* MrWall == Heykeyo#2109
+--* MrWall == Heykeyo#0191
