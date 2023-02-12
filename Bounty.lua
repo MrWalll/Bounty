@@ -61,7 +61,7 @@ end)
 --Notify
 menu.divider(menu.my_root(), "===================")
 
-noti = menu.toggle(menu.my_root(), "Notifications", {}, "By default notifications are turned OFF", function(on)
+menu.toggle(menu.my_root(), "Notifications", {}, "By default notifications are turned OFF", function(on)
 	if on then
 		notify = true
 		util.show_corner_help("~p~Notifications ~g~On")
