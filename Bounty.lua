@@ -1,4 +1,6 @@
---coded by *MrWall
+--[[
+	Coded by MrWall
+]]
 
 util.require_natives(1640181023)
 
@@ -71,22 +73,17 @@ noti = menu.toggle(menu.my_root(), "Notifications", {}, "By default notification
 	end
 end)
 
-function playerSetup(pid)
-	menu.attach_after(menu.ref_by_path("Players>"..players.get_name_with_tags(pid)..">Trolling>Mugger Loop"), menu.toggle_loop(menu.shadow_root(), "Place Bounty Loop", {}, 'This does NOT collect the bounty.', function()
-		if players.get_bounty(pid) == nil then
-			menu.trigger_commands("bounty"..players.get_name(pid).." "..randomamount)
+players.add_command_hook(function(playerID)
+	menu.attach_after(menu.ref_by_path("Players>"..players.get_name_with_tags(playerID)..">Trolling>Mugger Loop"), menu.toggle_loop(menu.shadow_root(), "Place Bounty Loop", {}, 'This does NOT collect the bounty.', function()
+		if players.exists(playerID) and players.get_bounty(playerID) == nil then
+			menu.trigger_commands("bounty"..players.get_name(playerID).." "..randomamount)
 			if notify then
-				util.show_corner_help("~o~Bounty placed~w~ on ~b~"..players.get_name(pid).." \n~r~$ ~w~= "..randomamount)
+				util.show_corner_help("~o~Bounty placed~w~ on ~b~"..players.get_name(playerID).." \n~r~$ ~w~= "..randomamount)
 			end
 		else
 			util.yield(delay * 1000)
 		end
 	end))
-end
-
-players.on_join(playerSetup)
-players.dispatch_on_join()
+end)
 
 util.keep_running()
-
---* MrWall == Heykeyo#0191
