@@ -2,8 +2,6 @@
 	Coded by MrWall
 ]]
 
-util.require_natives(1640181023)
-
 util.show_corner_help("~g~Loaded ~o~ " .. SCRIPT_FILENAME .. " ~p~;)\n~s~Let's farm some ~g~$$$")
 
 function on_stp()
